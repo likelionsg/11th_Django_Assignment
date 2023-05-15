@@ -2,10 +2,27 @@ from django.shortcuts import get_object_or_404, render, redirect
 from .models import Shopping
 from store.models import Store
 from .forms import ShoppingForm, ShoppingModelForm
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 def shopping_list(request):
-    qs = Shopping.objects.all()
-    return render(request, 'index.html', {'item_list': qs,})
+    sort_criteria = request.GET.get('sorting', 'descending-price')
+    if sort_criteria == 'descending-price':
+        qs = Shopping.objects.order_by('-price')
+    elif sort_criteria == 'ascending-price':
+        qs = Shopping.objects.order_by('price')
+    elif sort_criteria == 'name':
+        qs = Shopping.objects.order_by('name')
+    page = request.GET.get('page', '1')
+    paginator = Paginator(qs, '2') # 한 페이지 당 객체 두개씩 담긴다는 말
+    paginated_qs = paginator.get_page(page)
+    return render(request, 'index.html', {'paginated_list': paginated_qs, 'sorting': sort_criteria})
+
+def search(request):
+    word = request.POST['search']
+    qs = Shopping.objects.filter(name__contains = word)
+    return render(request, 'search.html', {'item_list' : qs})
+
 
 def detail(request, pk):
     item = get_object_or_404(Shopping, pk=pk)
@@ -39,6 +56,7 @@ def formcreate(request):
         form = ShoppingForm()
     return render(request, 'form_create.html', {'form':form})
 
+@login_required
 def modelformcreate(request):
     if request.method == 'POST':
         form = ShoppingModelForm(request.POST)
@@ -48,3 +66,9 @@ def modelformcreate(request):
     else:
         form = ShoppingModelForm()
     return render(request, 'form_create.html', {'form':form})
+
+def search(request):
+    oq = request.POST['search']
+    qs = Shopping.objects.filter(name__contains=oq)
+    return render(request, 'search.html', {'item_list' : qs})
+
