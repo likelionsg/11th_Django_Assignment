@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     
     'shopping',
     'store',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'		
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+AUTH_USER_MODEL = 'accounts.User' ## user_model을 accounts에 있는 User모델로 지정하겠다는 의미
