@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+
+
 urlpatterns = [
     path('', views.shopping_list, name='list_page'),
     path('<int:pk>/', views.detail, name='detail_page'),
@@ -10,4 +12,5 @@ urlpatterns = [
     path('formcreate/', views.formcreate, name='formcreate'),
     # django modelform을 이용해 쇼핑 아이템(Shopping) 객체 만들기
     path('modelformcreate/', views.modelformcreate, name='modelformcreate'),
+    path('searchitem/', views.search_item, name='search_item')
 ]
