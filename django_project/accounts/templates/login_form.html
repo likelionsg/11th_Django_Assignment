@@ -5,18 +5,18 @@
 <!-- static file을 불러오는(load) 템플릿 언어를 작성하고 
     link 태그로 login.css를 불러오기! -->
 {% load static %}
-<section class="py-5" style="background-color: white;">
-    <div class="container px-4 px-lg-5 mt-5">
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <form id='form', method="POST">
+<link href="{% static 'css/login.css' %}" rel="stylesheet" />
+    <section id="section" class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <form id='form' method="POST">
                     {% csrf_token %}
-                    <!-- html form으로 아이디, 비밀번호, 전화번호 받아서 회원가입하기 -->
+                    <!-- html form으로 아이디, 비밀번호 받아서 로그인하기 -->
                     <input name="username" type="text" placeholder="ID"><br>
                     <input name="password" type="text" placeholder="PASSWD"><br>
-                    <input name="phone" type="text" placeholder="PHONE"><br>
                     <input id='skhbutton' type="submit" class="fadeIn fourth" value="Login">
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 {% endblock %}
