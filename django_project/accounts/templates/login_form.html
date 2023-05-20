@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<link href="{% static 'css/login.css' %}" rel="stylesheet" />
+<section id='section' class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <form id='form' class="" method="POST">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="ID"><br>
+                <input type="text" name="password" placeholder="PW"><br>
+                <input id='skhbutton' type="submit" class="fadeIn fourth" value="Login">
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
