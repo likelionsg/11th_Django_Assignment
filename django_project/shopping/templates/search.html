@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% block search %}
 <form action="{% url 'search_item' %}" method="POST">
     {% csrf_token %}
@@ -6,14 +7,14 @@
     <input type="submit" value="검색">
 </form>
 {% endblock %}
+
 {% block content %}
 <!-- Header-->
 <header class="bg-dark py-5" style="background-color: whites;">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">My Shopping List</h1>
-            <p class="lead fw-normal text-white-50 mb-0">쇼핑할 물건의 목록을 반환하는 페이지입니다</p>
-            </p>
+            <h1 class="display-4 fw-bolder">Search</h1>
+            <p class="lead fw-normal text-white-50 mb-0">검색 결과를 반환하는 페이지입니다</p>
         </div>
     </div>
 </header>
